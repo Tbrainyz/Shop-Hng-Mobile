@@ -20,7 +20,7 @@ export default function RootLayout() {
             headerRight: () => <CartButton />,
           }}
         >
-          <Stack.Screen name="index" options={{ title: "Hng-Shopping" }} />
+          <Stack.Screen name="index" options={{ title: "Shop-Hng" }} />
           <Stack.Screen name="product/[slug]" options={{ title: "" }} />
           <Stack.Screen name="cart" options={{ title: "Cart", headerRight: () => null }} />
           <Stack.Screen name="checkout" options={{ title: "Checkout", headerRight: () => null }} />

@@ -1,0 +1,27 @@
+{
+  "cli": {
+    "version": ">= 24.10.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://shop-hng.vercel.app",
+        "EXPO_PUBLIC_PAYSTACK_PUBLIC_KEY": "pk_test_2cc80540e730a2bcb737d760dbd692d729d62236",
+        "EXPO_PUBLIC_CURRENCY": "NGN"
+      }
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
