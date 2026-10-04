@@ -1,18 +1,32 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import CartButton from "@/components/CartButton";
+import { AuthProvider } from "@/lib/auth";
+import { CartProvider } from "@/lib/cart";
+import { colors } from "@/lib/theme";
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
-
-SplashScreen.preventAutoHideAsync();
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// Like app/layout.tsx on the web: wraps every screen. Each file in this folder is a screen/route.
+export default function RootLayout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <AuthProvider>
+      <CartProvider>
+        <StatusBar style="light" />
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: colors.ink },
+            headerTintColor: colors.white,
+            headerTitleStyle: { fontWeight: "700" },
+            contentStyle: { backgroundColor: colors.bg },
+            headerRight: () => <CartButton />,
+          }}
+        >
+          <Stack.Screen name="index" options={{ title: "Hng-Shopping" }} />
+          <Stack.Screen name="product/[slug]" options={{ title: "" }} />
+          <Stack.Screen name="cart" options={{ title: "Cart", headerRight: () => null }} />
+          <Stack.Screen name="checkout" options={{ title: "Checkout", headerRight: () => null }} />
+          <Stack.Screen name="order/[id]" options={{ title: "Order", headerBackVisible: false, headerRight: () => null }} />
+        </Stack>
+      </CartProvider>
+    </AuthProvider>
   );
 }
